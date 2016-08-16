@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Artsy | AB Test Dashboard</title>
+  <link rel="stylesheet" href="../static/css/fonts.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+</head>
+<body>
+  <div class="guide-background">
+  <div class="guide">
+    <div class="main-heading">
+      <img class="ab-logo" src="../static/images/ab_logo.png">
+      <h1 class="main-heading-title">TEST DASHBOARD</h1>
+    </div>
+    <div class="main-heading-content">
+      <div class="main-heading-content-left">
+        <div class="recent-ab-tests">
+          <h4>MOST RECENT AB TESTS</h4>
+          {% for test in ab_tests %}
+            <p>{{ test }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="main-heading-content-right">
+        <div class="ab-text-explanation">
+          <h4>NEWCOMERS</h4>
+          <p>An AB test is dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

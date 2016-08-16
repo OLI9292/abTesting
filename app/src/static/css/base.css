@@ -1,0 +1,62 @@
+body {
+  width: 100%
+  margin: 0 auto;
+}
+
+.guide-background {
+  background-color: black;
+  width: 100%;
+}
+.guide {
+  background-color: black;
+  height: 550px;
+  width: 100%;
+  min-width: 900px;
+  max-width: 1300px;
+  color: white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-heading {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.ab-logo {
+  margin: 20px 15px 0px 0px;
+  height: 35px;
+  width: auto;
+}
+
+.main-heading-title {
+  display: inline-block;
+  font-family: 'Garamond';
+  font-size: 26px;
+  letter-spacing: 2px;
+  margin-top: 25px;
+  vertical-align: top;
+}
+
+.main-heading-content-left, .main-heading-content-right {
+  float: left;
+  width: 50%
+}
+
+.recent-ab-tests, .ab-text-explanation {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.recent-ab-tests h4, .ab-text-explanation h4 {
+  font-family: 'AvantGarde';
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.recent-ab-tests p, .ab-text-explanation p {
+  font-family: 'Garamond';
+  font-size: 16px;
+  line-height: 22px;
+}
