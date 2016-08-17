@@ -64,6 +64,17 @@ body {
 .ab-test-overview {
   min-width: 900px;
   max-width: 1300px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ab-test-header h1 {
+  width: 100%;
+  text-align: center;
+  font-family: 'Garamond';
+  margin: 50px 0px 50px 0px;
+  font-size: 42px;
 }
 
 .test-and-settings {
@@ -138,7 +149,7 @@ h3 {
   outline: none;
   width: 100%;
   font-family: 'Garamond';
-  font-size: 22px;
+  font-size: 20px;
   border-width: 0 0 1px 0;
   border-color: #ccc;
   margin-top: 40px;
@@ -165,6 +176,10 @@ h3 {
   width: 200px;
   margin: 0 auto;
   margin-top: 40px;
+}
+
+.end-date-dropdown {
+  padding-bottom: 80px;
 }
 
 .tt-dropdown-menu {
@@ -202,4 +217,21 @@ h3 {
 
 .selected {
   color: #6a0bc1;
+}
+
+.submit h3 {
+  background-color: black;
+  color: white;
+  font-family: 'AvantGarde';
+  font-size: 13px;
+  letter-spacing: 2px;
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.submit {
+  cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
 }

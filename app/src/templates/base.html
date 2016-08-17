@@ -32,7 +32,7 @@
 </div>
 <div class="ab-test-overview">
   <div class="ab-test-header">
-    <h1></h1>
+    <h1>Redesigned Artwork Page</h1>
   </div>
   <div class="test-and-settings">
     <h3>Browse AB Tests</h3>
@@ -49,10 +49,15 @@
       </span>
     </div>
     <div class="start-date-dropdown">
-      <input placeholder="Start Date">
+      <input class="start-date-input" onfocus="this.placeholder = ''" placeholder="Start Date"
+                                      onblur="this.placeholder = 'Start Date'">
     </div>
     <div class="end-date-dropdown">
-      <input placeholder="End Date">
+      <input class="end-date-input" onfocus="this.placeholder = ''" placeholder="End Date"
+                                    onblur="this.placeholder = 'End Date'">
+    </div>
+    <div class="submit" data-ab-test="">
+      <h3>SEARCH</h3>
     </div>
   </div>
   <div class="overview-tables">
@@ -81,19 +86,10 @@
     {% endfor %}
   </div>
 </div>
-
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
-
-<h1>jQuery Example</h1>
-<p>
-  <input type="text" size="5" name="a"> +
-  <input type="text" size="5" name="b"> =
-  <span id="result">?</span>
-<p><a href=# id="calculate">calculate server side</a>
-
 </body>
 </html>

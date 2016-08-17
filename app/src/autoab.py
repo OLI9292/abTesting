@@ -115,10 +115,21 @@ def generate_metrics(control,test):
 
     return [df_metrics_one, df_metrics_two, df_metrics_three]
 
-def run_notebook(experiment):
-  exp = query_experiment_data(experiment)
+def run_notebook(experiment, start=None, end=None):
+  print experiment, start, end
+  exp = query_experiment_data(experiment, start, end)
   control, test = control_test_split(exp)
   return generate_metrics(control, test)
 
 def format(experiments):
   return [x.replace('_',' ').title() for x in experiments.experiment_name.tolist()]
+
+def get_start_end(experiment):
+  start_end = sql("""
+        SELECT MIN(sent_at),
+               MAX(sent_at)
+        FROM force_production.experiment_viewed
+        WHERE experiment_name = '%s'
+    """%experiment)
+  return ['{:%Y-%m-%d}'.format(start_end.iloc[0]['min']), 
+          '{:%Y-%m-%d}'.format(start_end.iloc[0]['max'])]

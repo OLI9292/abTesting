@@ -1,5 +1,9 @@
 $(function() {
 
+  function toCamelCase(string) {
+    return string.replace(/ /g, '_').toLowerCase();
+  };
+
   $('.ab-test-input').focus(function() {
     $(this).next().show();
   }).blur(function() {
@@ -12,19 +16,39 @@ $(function() {
 
   $('.ab-dataset p').live('mousedown', function() {
     var test = $(this).text();
-    getData(test);
-    if (test.length > 17) { test = test.slice(0, 17) + '...' };
+    $('.submit').attr('data-ab-test', toCamelCase(test)); 
+    getStartEnd(test);
+    if (test.length > 18) { test = test.slice(0, 18) + '...' };
     $('.ab-test-input').val(test);
     $('.ab-test-input').addClass('selected');
   });
 
-  var getData = function(abTest) {
-    abTest = abTest.replace(/ /g, '_').toLowerCase();
-    $.getJSON('/test_data', {
-      abTest: abTest
-    }, function(data) {
-      console.log(data.overview);
-      $(".ab-test-header h1").html(data.overview[0][0][0]);
-    });
+  $('.submit').click(function() {
+    getData($('.submit').attr('data-ab-test'), 
+            $('.start-date-input').val(),
+            $('.end-date-input').val());
+  });
+
+  var getStartEnd = function(abTest) {
+    $.ajax({
+      type: 'GET',
+      url : "/test_dates",
+      data: toCamelCase(abTest),
+      success: function(result) {
+        $('.start-date-input').val(result['data'][0]);
+        $('.end-date-input').val(result['data'][1]);
+      }
+    })
+  };
+
+  var getData = function(abTest, start, end) {
+    $.ajax({
+      type: 'GET',
+      url : "/test_data",
+      data: abTest + ',' + start + ',' + end,
+      success: function(result) {
+        $('.overview-tables').replaceWith(result);
+      }
+    })
   };
 });
