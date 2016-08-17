@@ -3,10 +3,18 @@ import warnings
 import numpy as np
 import pandas as pd
 import pymc as pm
+from datetime import date, timedelta
 
 from sqlalchemy import create_engine
 engine_string = os.environ['REDSHIFT_CONN']
 engine = create_engine(engine_string)
+
+def to_array(df):
+    arr = []
+    for i in df.index.values:
+        row = [i ,df.control[i], df.test[i]]
+        arr.append(row)
+    return arr
 
 def sql(query):
     return pd.read_sql("%s" %query, engine)
@@ -24,7 +32,7 @@ experiment_list = (sql("""
 defaults = ['default', 'original', 'old_homepage_1', 'old_homepage_2', 
             'old_homepage_3', 'old_homepage_4', 'old_homepage_5']
 
-def query_experiment_data(exp_name, start_date, end_date):
+def query_experiment_data(exp_name, start_date=None, end_date=None):
 
     # pulls the first and last experiment logged
     start_end = sql("""
@@ -37,6 +45,10 @@ def query_experiment_data(exp_name, start_date, end_date):
     # selects the value from the data frame
     first_log_of_exp = start_end.iloc[0]['min']
     last_log_of_exp = start_end.iloc[0]['max']
+
+    end_date = end_date if end_date else last_log_of_exp
+    start_date = start_date if start_date else last_log_of_exp - timedelta(days=1)
+    print start_date, end_date
 
     # queries the experiment table
     exp = sql("""
@@ -58,6 +70,7 @@ def query_experiment_data(exp_name, start_date, end_date):
     exp['session_number'] = exp.session_number.values.astype(int)
     exp['outcome'] = (exp.inquiries > 0).astype('int')
     exp = exp.set_index('session_start_at').sort_index()
+    print exp
     
     return exp
 
@@ -88,13 +101,11 @@ def generate_metrics(control,test):
     df_metrics = df_metrics[cols]
     df_metrics = df_metrics.T
     df_metrics.columns = [['control', 'test']]
-    print df_metrics
-    print
+    df_metrics_one = to_array(df_metrics)
 
     control_sum = pd.DataFrame(control.ix[:,12:22].sum(), columns=['control'])
     test_sum = pd.DataFrame(test.ix[:,12:22].sum(), columns=['test'])
-    print pd.merge(control_sum,test_sum,left_index=True,right_index=True)
-    print 
+    df_metrics_two = to_array(pd.merge(control_sum,test_sum,left_index=True, right_index=True))
 
     metrics = { 'positive LVID outcomes / uniques': [1.*control_lvid_positive/control.looker_visitor_id.nunique(),1.*test_lvid_positive/test.looker_visitor_id.nunique()],
                 'positive sessions / total sessions': [1.*control.outcome.sum()/control.session_id.nunique(),1.*test.outcome.sum()/test.session_id.nunique()]
@@ -102,12 +113,11 @@ def generate_metrics(control,test):
 
     df_metrics = pd.DataFrame(metrics).T
     df_metrics.columns = [['control', 'test']]
-    print df_metrics
-    print '-'*70
-    print
+    df_metrics_three = to_array(df_metrics)
 
-'''
-exp = query_experiment_data('personalized_homepage', '2016-07-25', '2016-07-26')
-control, test = control_test_split(exp)
-generate_metrics(control, test)
-'''
+    return [df_metrics_one, df_metrics_two, df_metrics_three]
+
+def zero_state_data(experiment):
+  exp = query_experiment_data(experiment)
+  control, test = control_test_split(exp)
+  return generate_metrics(control, test)

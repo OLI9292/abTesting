@@ -45,7 +45,7 @@ body {
 }
 
 .recent-ab-tests, .ab-text-explanation {
-  width: 80%;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -59,4 +59,75 @@ body {
   font-family: 'Garamond';
   font-size: 16px;
   line-height: 22px;
+}
+
+.ab-test-overview {
+  min-width: 900px;
+  max-width: 1300px;
+}
+
+.test-and-settings {
+  width: 20%;
+  margin-right: 10%;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.overview-tables {
+  width: 45%;
+  margin-right: 25%;
+}
+
+.overview-tables h2 {
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Garamond';
+  font-size: 28px;
+  border-top: 2px solid black;
+  padding-top: 10px;
+  letter-spacing: 1px;
+}
+
+.overview-heading {
+  width: 125px;
+  margin: 0 auto;
+  padding-top: 10px;
+  margin-bottom: 50px;
+}
+
+.test-and-settings, .overview-tables {
+  float: left;
+}
+
+table {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  text-align: left;
+  font-family: 'AvantGarde';
+  letter-spacing: 1px;
+  font-size: 12px;
+  padding-bottom: 20px;
+}
+
+td {
+  font-family: 'Garamond';
+  font-size: 16px;
+}
+
+tr {
+  line-height: 20px;
+}
+
+h3 {
+  font-family: 'Garamond';
+  font-size: 20px;
 }
