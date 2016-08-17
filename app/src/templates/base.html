@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <title>Artsy | AB Test Dashboard</title>
-  <link rel="stylesheet" href="../static/css/fonts.css">
-  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fonts.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
 </head>
 <body>
 <div class="guide-background">
   <div class="guide">
     <div class="main-heading">
-      <img class="ab-logo" src="../static/images/ab_logo.png">
+      <img class="ab-logo" src="{{ url_for('static', filename='images/ab_logo.png') }}">
       <h1 class="main-heading-title">TEST DASHBOARD</h1>
     </div>
     <div class="main-heading-content">
@@ -36,11 +36,24 @@
   </div>
   <div class="test-and-settings">
     <h3>Browse AB Tests</h3>
-    <input>
-    <h3>Start Date</h3>
-    <input>
-    <h3>End Date</h3>
-    <input>
+    <div class="ab-test-dropdown">
+      <img class="search-icon" src="{{ url_for('static', filename='images/search_icon.png') }}">
+      <input class="ab-test-input" onfocus="this.placeholder = ''" placeholder="All Tests"
+                                   onblur="this.placeholder = 'All Tests'">
+      <span class="tt-dropdown-menu">
+        <div class="ab-dataset">
+          {% for test in ab_tests %}
+            <p>{{ test }}</p>
+          {% endfor %}
+        </div>
+      </span>
+    </div>
+    <div class="start-date-dropdown">
+      <input placeholder="Start Date">
+    </div>
+    <div class="end-date-dropdown">
+      <input placeholder="End Date">
+    </div>
   </div>
   <div class="overview-tables">
     <div class="overview-heading">
@@ -68,5 +81,19 @@
     {% endfor %}
   </div>
 </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
+
+<h1>jQuery Example</h1>
+<p>
+  <input type="text" size="5" name="a"> +
+  <input type="text" size="5" name="b"> =
+  <span id="result">?</span>
+<p><a href=# id="calculate">calculate server side</a>
+
 </body>
 </html>

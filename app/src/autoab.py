@@ -46,9 +46,8 @@ def query_experiment_data(exp_name, start_date=None, end_date=None):
     first_log_of_exp = start_end.iloc[0]['min']
     last_log_of_exp = start_end.iloc[0]['max']
 
-    end_date = end_date if end_date else last_log_of_exp
-    start_date = start_date if start_date else last_log_of_exp - timedelta(days=1)
-    print start_date, end_date
+    end_date = end_date if end_date else last_log_of_exp - timedelta(days=2)
+    start_date = start_date if start_date else end_date - timedelta(hours=1)
 
     # queries the experiment table
     exp = sql("""
@@ -70,7 +69,6 @@ def query_experiment_data(exp_name, start_date=None, end_date=None):
     exp['session_number'] = exp.session_number.values.astype(int)
     exp['outcome'] = (exp.inquiries > 0).astype('int')
     exp = exp.set_index('session_start_at').sort_index()
-    print exp
     
     return exp
 
@@ -117,7 +115,10 @@ def generate_metrics(control,test):
 
     return [df_metrics_one, df_metrics_two, df_metrics_three]
 
-def zero_state_data(experiment):
+def run_notebook(experiment):
   exp = query_experiment_data(experiment)
   control, test = control_test_split(exp)
   return generate_metrics(control, test)
+
+def format(experiments):
+  return [x.replace('_',' ').title() for x in experiments.experiment_name.tolist()]
