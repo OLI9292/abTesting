@@ -3,7 +3,7 @@ import warnings
 import numpy as np
 import pandas as pd
 import pymc as pm
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 from sqlalchemy import create_engine
 engine_string = os.environ['REDSHIFT_CONN']
@@ -113,10 +113,28 @@ def generate_metrics(control,test):
     df_metrics.columns = [['control', 'test']]
     df_metrics_three = to_array(df_metrics)
 
-    return [df_metrics_one, df_metrics_two, df_metrics_three]
+    # Formatted-data for D3 charts
+    control['status'] = 'control'
+    test['status'] = 'test'
+    cols = ['status', 'count_pv', 'count_artwork_pv', 'count_artist_pv', 'count_article_pv', 
+        'inquiries', 'accounts_created', 'three_way_handshakes', 'three_way_handshakes_within_seven_days', 
+        'purchases', 'total_purchase_price']
+    #cols = ['status', 'count_pv']
+    control = control[cols]
+    test = test[cols]
+    for i in cols[1:]:
+      control[i] = control[i].cumsum()
+      test[i] = test[i].cumsum()
+    frames = [control, test]
+    d3Data = pd.concat(frames).fillna('')[cols]
+    d3Data = d3Data.reset_index()
+    d3Data['session_start_at'] = d3Data['session_start_at'].astype(str)
+    d3Data = d3Data.to_json(orient='records')
+
+    return [df_metrics_one, df_metrics_two, df_metrics_three, d3Data]
 
 def run_notebook(experiment, start=None, end=None):
-  print experiment, start, end
+  print 'Requesting: ' + experiment, start, end
   exp = query_experiment_data(experiment, start, end)
   control, test = control_test_split(exp)
   return generate_metrics(control, test)
