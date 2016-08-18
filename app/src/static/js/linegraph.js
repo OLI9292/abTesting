@@ -2,7 +2,9 @@
 
   for (var g = 0; g < graphs.length; g++) {
 
-    var m = [30, 30, 40, 50];
+    $('.graph-heading').show();
+
+    var m = [30, 30, 40, 60];
     var h = 400 - m[0] - m[2];
     var w = 600 - m[1] - m[3]; 
     var column = graphs[g]['col'];
@@ -20,9 +22,6 @@
     var x = d3.time.scale().domain([format.parse(data[0]['session_start_at']), 
                                     format.parse(data.slice(-1)[0]['session_start_at'])])
                            .range([m[3], w+m[1]]);
-
-    console.log(column);
-    console.log(max(data, column));
 
     var y = d3.scale.linear().domain([0, max(data, column) * 1.2]).range([h, 0]);
 

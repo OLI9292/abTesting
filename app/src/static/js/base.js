@@ -1,6 +1,6 @@
 $(function() {
 
-  var data;
+  window.data = [];
 
   window.graphs = [
     {'div': '#graph1', 'col': 'count_pv', 'title': 'Count Pageviews' },
@@ -84,9 +84,6 @@ $(function() {
       type: 'GET',
       url : "/test_data",
       data: abTest + ',' + start + ',' + end,
-      invokedata: {
-        abTest: abTest
-      },
       success: function(result) {
         $('.overview-tables').replaceWith(result);
         getD3Data();

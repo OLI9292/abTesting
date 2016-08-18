@@ -52,7 +52,7 @@ body {
 
 .recent-ab-tests h4, .ab-text-explanation h4 {
   font-family: 'AvantGarde';
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 1px;
 }
 
@@ -106,6 +106,10 @@ body {
   margin: 0 auto;
   padding-top: 10px;
   margin-bottom: 60px;
+}
+
+.graph-heading {
+  display: none;
 }
 
 .test-and-settings, .overview-tables {

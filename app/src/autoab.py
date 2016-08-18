@@ -42,6 +42,8 @@ def query_experiment_data(exp_name, start_date=None, end_date=None):
         WHERE experiment_name = '%s'
     """%exp_name)
 
+    print start_date, end_date
+
     # selects the value from the data frame
     first_log_of_exp = start_end.iloc[0]['min']
     last_log_of_exp = start_end.iloc[0]['max']
@@ -119,7 +121,6 @@ def generate_metrics(control,test):
     cols = ['status', 'count_pv', 'count_artwork_pv', 'count_artist_pv', 'count_article_pv', 
         'inquiries', 'accounts_created', 'three_way_handshakes', 'three_way_handshakes_within_seven_days', 
         'purchases', 'total_purchase_price']
-    #cols = ['status', 'count_pv']
     control = control[cols]
     test = test[cols]
     for i in cols[1:]:
@@ -129,7 +130,9 @@ def generate_metrics(control,test):
     d3Data = pd.concat(frames).fillna('')[cols]
     d3Data = d3Data.reset_index()
     d3Data['session_start_at'] = d3Data['session_start_at'].astype(str)
+
     d3Data = d3Data.to_json(orient='records')
+
 
     return [df_metrics_one, df_metrics_two, df_metrics_three, d3Data]
 
