@@ -2,7 +2,6 @@ import os
 import warnings
 import numpy as np
 import pandas as pd
-import pymc as pm
 from datetime import date, timedelta, datetime
 
 from sqlalchemy import create_engine
