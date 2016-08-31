@@ -27,7 +27,6 @@ def d3_data():
 
 @app.route("/")
 def index(overview = blank_data):
-  print 'hi'
   return render_template('base.html', ab_tests = ab_tests, overview = overview)
 
 if __name__ == "__main__":
