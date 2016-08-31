@@ -1,1 +1,1 @@
-web: cd app && gunicorn wsgi:app ${PORT}
+web: cd app && gunicorn app:app ${PORT}
