@@ -62,6 +62,10 @@ body {
   line-height: 22px;
 }
 
+.recent-ab-tests p:hover {
+  cursor: pointer;
+}
+
 .ab-test-overview {
   min-width: 1100px;
   max-width: 1300px;

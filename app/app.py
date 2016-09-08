@@ -14,7 +14,7 @@ def authenticate(f):
   @wraps(f)
   def wrapper(*args, **kwargs):
     auth = request.form
-    if valid_credentials(auth['username'], auth['password']):
+    if not valid_credentials(auth['username'], auth['password']):
       return render_template('login.html', error='Invalid Attempt')
     return f(*args, **kwargs)
   return wrapper

@@ -4,9 +4,9 @@
 
     $('.graph-heading').show();
 
-    var m = [30, 30, 40, 60];
-    var h = 400 - m[0] - m[2];
-    var w = 600 - m[1] - m[3]; 
+    var m = [50, 30, 40, 60];
+    var h = 450 - m[0] - m[2];
+    var w = 650 - m[1] - m[3]; 
     var column = graphs[g]['col'];
     var div = graphs[g]['div'];
     var title = graphs[g]['title'];
@@ -70,7 +70,7 @@
 
     graph.append('text')
       .text(title)
-      .attr("y", '-10')
+      .attr("y", '-20')
       .attr("class", "graph-title");
 
     graph.append('text')

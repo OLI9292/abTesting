@@ -32,15 +32,10 @@ $(function() {
   
   window.addEventListener("scroll", changeHeader, false);
 
-  function toCamelCase(string) {
-    return string.replace(/ /g, '_').toLowerCase();
-  };
-
-  function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };
+  $('.recent-ab-tests p').click(function() {
+    $.scrollTo(510, 600);
+    getTestName.apply(this);
+  });
 
   $('.ab-test-input').focus(function() {
     $(this).next().show();
@@ -70,15 +65,14 @@ $(function() {
     loading.apply($('.submit'));
   });
 
-  var loading = function() {
-    var elem = this.children('h3:first');
-    elem.text('LOADING');
-    load = setInterval(function() {
-      elem.text(elem.text() + '.');
-      if (elem.text().length > 10) {
-        elem.text(elem.text().slice(0, 7));
-      }
-    }, 1000);
+  var getTestName = function() {
+    var test = $(this).text();
+    console.log(test);
+    $('.submit').attr('data-ab-test', toCamelCase(test)); 
+    getStartEnd(test);
+    if (test.length > 18) { test = test.slice(0, 21) + '...' };
+    $('.ab-test-input').val(test);
+    $('.ab-test-input').addClass('selected');
   };
 
   var getStartEnd = function(abTest) {
@@ -104,7 +98,7 @@ $(function() {
         var exp = $('.submit').attr('data-ab-test').replace(/_/g, ' ');
         $('.ab-test-header h1').text(toTitleCase(exp));
         clearInterval(load);
-        $('.submit h3').text('SEARCH')
+        $('.submit h3').text('CALCULATE')
       }
     });
   };
@@ -123,5 +117,26 @@ $(function() {
 
   function setData(res) {
     data = res;
+  };
+
+  var loading = function() {
+    var elem = this.children('h3:first');
+    elem.text('LOADING');
+    load = setInterval(function() {
+      elem.text(elem.text() + '.');
+      if (elem.text().length > 10) {
+        elem.text(elem.text().slice(0, 7));
+      }
+    }, 1000);
+  };
+
+  function toCamelCase(string) {
+    return string.replace(/ /g, '_').toLowerCase();
+  };
+
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   };
 });

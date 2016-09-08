@@ -57,7 +57,7 @@
                                       onblur="this.placeholder = 'End Date'">
       </div>
       <div class="submit" data-ab-test="">
-        <h3>SEARCH</h3>
+        <h3>CALCULATE</h3>
       </div>
     </div>
   </div>
@@ -91,27 +91,28 @@
       {% endfor %}
     </div>
   </div>
-</div>
-<div class="graph-container">
-  <div class="graph-heading">
-    <h2>Graphs</h2>
+  <div class="graph-container">
+    <div class="graph-heading">
+      <h2>Graphs</h2>
+    </div>
+    <div id="graph"></div>
+    <div id="graph1"></div>
+    <div id="graph2"></div>
+    <div id="graph3"></div>
+    <div id="graph4"></div>
+    <div id="graph5"></div>
+    <div id="graph6"></div>
+    <div id="graph7"></div>
+    <div id="graph8"></div>
+    <div id="graph9"></div>
+    <div id="graph10"></div>
   </div>
-  <div id="graph"></div>
-  <div id="graph1"></div>
-  <div id="graph2"></div>
-  <div id="graph3"></div>
-  <div id="graph4"></div>
-  <div id="graph5"></div>
-  <div id="graph6"></div>
-  <div id="graph7"></div>
-  <div id="graph8"></div>
-  <div id="graph9"></div>
-  <div id="graph10"></div>
 </div>
 <script type="text/javascript">
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.scrollTo.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
 </body>
