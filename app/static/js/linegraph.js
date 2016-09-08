@@ -75,14 +75,14 @@
 
     graph.append('text')
       .text('TEST |')
-      .attr("y", '320')
+      .attr("y", '350')
       .attr("x", '500')
       .style("stroke", '#6A0BC1')
       .attr("class", "test-key");
 
     graph.append('text')
       .text('CONTROL |')
-      .attr("y", '300')
+      .attr("y", '330')
       .attr("x", '500')
       .attr("class", "control-key");
   }
