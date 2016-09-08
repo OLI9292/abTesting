@@ -33,59 +33,63 @@
 </div>
 <div class="ab-test-overview">
   <div class="blocking-div"></div>
-  <div class="test-and-settings">
-    <h3>Browse AB Tests</h3>
-    <div class="ab-test-dropdown">
-      <img class="search-icon" src="{{ url_for('static', filename='images/search_icon.png') }}">
-      <input class="ab-test-input" onfocus="this.placeholder = ''" placeholder="All Tests"
-                                   onblur="this.placeholder = 'All Tests'">
-      <span class="tt-dropdown-menu">
-        <div class="ab-dataset">
-          {% for test in ab_tests %}
-            <p>{{ test }}</p>
-          {% endfor %}
-        </div>
-      </span>
-    </div>
-    <div class="start-date-dropdown">
-      <input class="start-date-input" onfocus="this.placeholder = ''" placeholder="Start Date"
-                                      onblur="this.placeholder = 'Start Date'">
-    </div>
-    <div class="end-date-dropdown">
-      <input class="end-date-input" onfocus="this.placeholder = ''" placeholder="End Date"
-                                    onblur="this.placeholder = 'End Date'">
-    </div>
-    <div class="submit" data-ab-test="">
-      <h3>SEARCH</h3>
+  <div class="test-and-settings-container">
+    <div class="test-and-settings">
+      <h3>Browse AB Tests</h3>
+      <div class="ab-test-dropdown">
+        <img class="search-icon" src="{{ url_for('static', filename='images/search_icon.png') }}">
+        <input class="ab-test-input" onfocus="this.placeholder = ''" placeholder="All Tests"
+                                     onblur="this.placeholder = 'All Tests'">
+        <span class="tt-dropdown-menu">
+          <div class="ab-dataset">
+            {% for test in ab_tests %}
+              <p>{{ test }}</p>
+            {% endfor %}
+          </div>
+        </span>
+      </div>
+      <div class="start-date-dropdown">
+        <input class="start-date-input" onfocus="this.placeholder = ''" placeholder="Start Date"
+                                        onblur="this.placeholder = 'Start Date'">
+      </div>
+      <div class="end-date-dropdown">
+        <input class="end-date-input" onfocus="this.placeholder = ''" placeholder="End Date"
+                                      onblur="this.placeholder = 'End Date'">
+      </div>
+      <div class="submit" data-ab-test="">
+        <h3>SEARCH</h3>
+      </div>
     </div>
   </div>
-  <div class="overview-tables">
-    <div class="ab-test-header">
-      <h1>Choose a Test</h1>
-    </div>
-    <div class="overview-heading">
-      <h2>Overview</h2>
-    </div>
-    {% for data_group in overview %}
-      <table>
-        <thead>
-          <tr>
-            <th style="width: 300px">METRIC</th>
-            <th style="width: 150px">CONTROL</th>
-            <th style="width: 100px">TEST</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for metric in data_group %}
+  <div class="overview-tables-container">
+    <div class="overview-tables">
+      <div class="ab-test-header">
+        <h1>Choose a Test</h1>
+      </div>
+      <div class="overview-heading">
+        <h2>Overview</h2>
+      </div>
+      {% for data_group in overview %}
+        <table>
+          <thead>
             <tr>
-              <td>{{ metric[0] }}</td>
-              <td>{{ metric[1]|round(5, 'common') }}</td>
-              <td>{{ metric[2]|round(5, 'common') }}</td>
+              <th style="width: 320px">METRIC</th>
+              <th style="width: 170px">CONTROL</th>
+              <th style="width: 120px">TEST</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endfor %}
+          </thead>
+          <tbody>
+            {% for metric in data_group %}
+              <tr>
+                <td>{{ metric[0] }}</td>
+                <td>{{ metric[1]|round(5, 'common') }}</td>
+                <td>{{ metric[2]|round(5, 'common') }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endfor %}
+    </div>
   </div>
 </div>
 <div class="graph-container">
@@ -104,11 +108,11 @@
   <div id="graph9"></div>
   <div id="graph10"></div>
 </div>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js'></script>
 <script type="text/javascript">
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,64 @@
+body, html {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h2 {
+  font-size: 36px;
+  font-family: 'Garamond';
+}
+
+form {
+  width: 300px;
+  text-align: left;
+  margin: 0 auto;
+}
+
+input {
+  width: 300px;
+}
+
+::-webkit-input-placeholder {
+  color: black;
+}
+::-moz-placeholder {
+  color: black;
+}
+:-ms-input-placeholder {
+  color: black;
+}
+:-moz-placeholder {
+  color: black;
+}
+
+input {
+  outline: none;
+  width: 300px;
+  font-family: 'Garamond';
+  font-size: 18px;
+  letter-spacing: .5px;
+  border-width: 0 0 1px 0;
+  border-color: #ccc;
+  margin-top: 40px;
+}
+
+input:focus {
+  border-color: #6a0bc1;
+}
+
+input[type="submit"] {
+  height: 50px;
+  line-height: 45px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-family: 'AvantGarde';
+  transition: background-color .5s ease;
+  background-color: black;
+  color: white;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #6a0bc1;
+}

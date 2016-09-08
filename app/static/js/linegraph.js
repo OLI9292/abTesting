@@ -58,14 +58,14 @@
       .datum(control)
       .attr("class", "line")
       .attr("d", line)
-      .attr("transform", "translate(" + (m[3] * -1) + ", 0)")
+      .attr("transform", "translate(" + (m[3] * -.5) + ", 0)")
       .style("stroke", "black");
 
     graph.append("svg:path")
       .datum(test)
       .attr("class", "line")
       .attr("d", line2)
-      .attr("transform", "translate(" + (m[3] * -1) + ", 0)")
+      .attr("transform", "translate(" + (m[3] * -.5) + ", 0)")
       .style("stroke", "#6A0BC1");
 
     graph.append('text')

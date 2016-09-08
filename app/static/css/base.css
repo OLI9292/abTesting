@@ -85,10 +85,15 @@ body {
   display: none;
 }
 
-.overview-tables {
-  width: 50%;
-  margin-right: 25%;
+.overview-tables-container {
+  width: 75%;
+  float: right;
   margin-bottom: 100px;
+}
+
+.overview-tables {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .overview-tables h2 {
@@ -112,8 +117,9 @@ body {
   display: none;
 }
 
-.test-and-settings, .overview-tables {
-  float: left;
+.test-and-settings {
+  width: 225px;
+  margin-left: 75px;
 }
 
 table {
@@ -144,7 +150,7 @@ tr {
 .start-date-dropdown input,
 .end-date-dropdown input {
   outline: none;
-  width: 200px;
+  width: 225px;
   font-family: 'Garamond';
   font-size: 20px;
   border-width: 0 0 1px 0;
@@ -153,11 +159,10 @@ tr {
   margin-top: 40px;
 }
 
-.test-and-settings {
-  width: 20%;
-  text-align: center;
+.test-and-settings-container {
+  width: 25%;
+  float: left;
   margin-top: 25px;
-  margin-right: 5%;
 }
 
 .submit h3 {
@@ -166,8 +171,9 @@ tr {
   color: white;
   font-family: 'AvantGarde';
   font-size: 13px;
+  text-align: center;
   letter-spacing: 2px;
-  width: 200px;
+  width: 225px;
   height: 50px;
   line-height: 50px;
 }
@@ -178,9 +184,13 @@ tr {
   margin: 0 auto;
 }
 
+.loading {
+  background-color: #6a0bc1;
+}
+
 h3 {
   font-family: 'Garamond';
-  width: 200px;
+  width: 250px;
   font-size: 22px;
   letter-spacing: 1px;
 }
@@ -203,7 +213,7 @@ h3 {
 }
 
 .ab-test-dropdown, .start-date-dropdown, .end-date-dropdown {
-  width: 200px;
+  width: 225px;
   margin-top: 40px;
 }
 
@@ -220,7 +230,7 @@ h3 {
   margin-top: -1px;
   text-align: left;
   padding-left: 15px;
-  width: 185px;
+  width: 210px;
   font-size: 14px;
   font-family: 'Garamond';
   position: absolute;
@@ -237,7 +247,7 @@ h3 {
   opacity: .5;
   position: absolute;
   margin-top: 43px;
-  margin-left: 183px;
+  margin-left: 208px;
 }
 
 .search-icon:hover {

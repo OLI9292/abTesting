@@ -1,4 +1,6 @@
 Flask==0.10.1
+Flask-OpenID==1.2.5
+python-OpenID==2.2.5
 numpy==1.10.2
 pandas==0.17.1
 sqlalchemy==1.0.5

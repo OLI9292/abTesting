@@ -39,10 +39,17 @@ path {
 
 .graph-container {
   margin-top: 60px;
-  width: 100%;
-  min-width: 1100px;
-  max-width: 1300px;
+  width: 75%;
+  min-width: 900px;
   margin: 0 auto;
+  float: right;
+}
+
+@media all and (max-width: 1100px) {
+  .graph-container {
+    float: none;
+    margin-left: 280px;
+  }
 }
 
 #graph, #graph1, #graph2, #graph3, #graph4, #graph5, 

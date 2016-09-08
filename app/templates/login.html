@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Artsy | AB Testing</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fonts.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+  <h2>Artsy | AB Testing</h2>
+  <form action="/dashboard" method="post">
+    <input type=text name=username onfocus="this.placeholder = ''" 
+      placeholder="Username" onblur="this.placeholder = 'Username'" required=""><br />
+    <input type=password name=password onfocus="this.placeholder = ''" 
+      placeholder="Password" onblur="this.placeholder = 'Password'" required=""><br />
+    <input type=submit value="LOGIN">
+  </form>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+</body>
+</html>

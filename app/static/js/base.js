@@ -1,6 +1,7 @@
 $(function() {
 
   window.data = [];
+  var load;
 
   window.graphs = [
     {'div': '#graph1', 'col': 'count_pv', 'title': 'Count Pageviews' },
@@ -16,14 +17,15 @@ $(function() {
   ];
 
   function changeHeader() {
-    var bodyElement = document.querySelector(".bl");
+    var bodyElement = $(".bl");
+    var settingsContainer = $(".test-and-settings-container");
     if (this.scrollY > 506) {
-      $('.test-and-settings').css('position', 'fixed');
-      $('.test-and-settings').css('top', '50px');
+      settingsContainer.css('position', 'fixed');
+      settingsContainer.css('top', '50px');
       $('.blocking-div').show();
     } else {
-      $('.test-and-settings').css('position', 'static');
-      $('.test-and-settings').css('top', 'auto');
+      settingsContainer.css('position', 'static');
+      settingsContainer.css('top', 'auto');
       $('.blocking-div').hide();
     }
   }
@@ -50,11 +52,11 @@ $(function() {
     $('.ab-test-input').focus();
   });
 
-  $('.ab-dataset p').live('mousedown', function() {
+  $('.ab-dataset p').mousedown(function() {
     var test = $(this).text();
     $('.submit').attr('data-ab-test', toCamelCase(test)); 
     getStartEnd(test);
-    if (test.length > 18) { test = test.slice(0, 18) + '...' };
+    if (test.length > 18) { test = test.slice(0, 21) + '...' };
     $('.ab-test-input').val(test);
     $('.ab-test-input').addClass('selected');
   });
@@ -65,7 +67,19 @@ $(function() {
             $('.end-date-input').val());
     $('.start-date-input').addClass('selected');
     $('.end-date-input').addClass('selected');
+    loading.apply($('.submit'));
   });
+
+  var loading = function() {
+    var elem = this.children('h3:first');
+    elem.text('LOADING');
+    load = setInterval(function() {
+      elem.text(elem.text() + '.');
+      if (elem.text().length > 10) {
+        elem.text(elem.text().slice(0, 7));
+      }
+    }, 1000);
+  };
 
   var getStartEnd = function(abTest) {
     $.ajax({
@@ -89,6 +103,8 @@ $(function() {
         getD3Data();
         var exp = $('.submit').attr('data-ab-test').replace(/_/g, ' ');
         $('.ab-test-header h1').text(toTitleCase(exp));
+        clearInterval(load);
+        $('.submit h3').text('SEARCH')
       }
     });
   };
